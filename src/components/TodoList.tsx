@@ -48,7 +48,6 @@ const TodoList: React.FC = () => {
           placeholder="Add a to-do"
           className="flex-1 focus:outline-none"
         />
-        {/* border border-gray-300 rounded-l py-2 px-3  focus:border-blue-500 */}
         <button
           onClick={handleAddTodo}
           className="bg-blue-600 hover:bg-blue-500 transition duration-200 ease-in-out text-white font-semibold p-3 rounded-[8px] focus:outline-none text-[14px]"
