@@ -1,10 +1,11 @@
 // import React from "react";
 // import logo from "./logo.svg";
 import "./App.css";
+import TodoList from "./components/TodoList";
 
 function App() {
   return (
-    <div className="App">
+    <div className="text-center bg-white min-h-screen">
       {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
@@ -19,7 +20,7 @@ function App() {
           Learn React
         </a>
       </header> */}
-      <h4 className="m-0 bg-[red]">To-dos</h4>
+      <TodoList />
     </div>
   );
 }
