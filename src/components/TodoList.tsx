@@ -58,7 +58,9 @@ const TodoList: React.FC = () => {
       <ul>
         {todos.map((todo) => (
           <li key={todo.id} className="flex items-center mb-2">
-            <span className={todo.completed ? "line-through" : ""}>
+            <span
+              className={todo.completed ? "line-through text-[#CBD5E1]" : ""}
+            >
               {todo.text}
             </span>
 
