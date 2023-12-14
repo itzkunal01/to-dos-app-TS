@@ -30,6 +30,11 @@ const MyButton: React.FC<MyButtonProps> = (props) => {
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
   };
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(e);
+  };
+
   return (
     <>
       <div>
@@ -56,14 +61,15 @@ const MyButton: React.FC<MyButtonProps> = (props) => {
 
         {/* =============== Lets handle forms now =============== */}
         <div>
-          <form action="">
+          <form onSubmit={handleSubmit}>
             <input
-              className="bg-[#d2a4a4] focus-visible:outline-none focus:unset p-2 rounded-lg m-5"
+              className="bg-[#e8e1e1] focus-visible:outline-none focus:unset p-2 rounded-lg m-5"
               onChange={handleNameChange}
               type="text"
               placeholder="Enter Your Name"
               value={value}
             />
+            <button type="submit">Submit</button>
           </form>
           <h1>{value}</h1>
         </div>
