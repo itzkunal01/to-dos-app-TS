@@ -14,37 +14,60 @@ interface Book {
 // type props = { text: string };
 // 1st approach
 // const MyButton = (props: { text: string }) => {
+
 // 2nd approach
 const MyButton: React.FC<MyButtonProps> = (props) => {
   // const [value, setValue] = useState(1); // implicit casting
+
   // OR always give type to useState
   // const [value, setValue] = useState<string>("b"); // explicit casting , always prefer this casting
-  const [value, setValue] = useState<Book>({
-    name: "One",
-    price: 10,
-  });
+  // const [value, setValue] = useState<Book>({
+  //   name: "One",
+  //   price: 10,
+  // });
+  // ==================== LET'S HANDLE FORMS ====================
+  const [value, setValue] = useState<string | undefined>();
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+  };
   return (
     <>
-      {/* <h3>{value}</h3> */}
-      <h3>
-        Name: {value.name} (Rs. {value.price})
-      </h3>
-      <button
-        className="bg-[#c9c6c6] p-2 rounded-lg m-5"
-        // onClick={props.onClick}
-        // onClick={() => setValue(value + 1)}
-        onClick={() => {
-          // 1.
-          // setValue("a");
-          // console.log("value changed from b to a");
+      <div>
+        {/* <h3>{value}</h3> */}
+        {/* <h3>
+          Name: {value.name} (Rs. {value.price})
+        </h3> */}
+        {/* <button
+          className="bg-[#c9c6c6] p-2 rounded-lg m-5"
+          // onClick={props.onClick}
+          // onClick={() => setValue(value + 1)}
+          onClick={() => {
+            // 1.
+            // setValue("a");
+            // console.log("value changed from b to a");
 
-          // 2.
-          // For personal interface (production-level-app)
-          setValue({ name: "Two", price: 20 + 1 });
-        }}
-      >
-        {props.text}
-      </button>
+            // 2.
+            // For personal interface (production-level-app)
+            setValue({ name: "Two", price: 20 + 1 });
+          }}
+        >
+          {props.text}
+        </button> */}
+
+        {/* =============== Lets handle forms now =============== */}
+        <div>
+          <form action="">
+            <input
+              className="bg-[#d2a4a4] focus-visible:outline-none focus:unset p-2 rounded-lg m-5"
+              onChange={handleNameChange}
+              type="text"
+              placeholder="Enter Your Name"
+              value={value}
+            />
+          </form>
+          <h1>{value}</h1>
+        </div>
+      </div>
     </>
   );
 };
