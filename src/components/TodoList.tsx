@@ -5,11 +5,9 @@ interface Todo {
   text: string;
   completed: boolean;
 }
-
 const TodoList: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [inputText, setInputText] = useState<string>("");
-
   const handleAddTodo = () => {
     if (inputText.trim() !== "") {
       const newTodo: Todo = {
@@ -21,33 +19,18 @@ const TodoList: React.FC = () => {
       setInputText("");
     }
   };
-
   const handleToggleCompletion = (id: number) => {
     const updatedTodos = todos.map((todo) =>
       todo.id === id ? { ...todo, completed: !todo.completed } : todo
     );
     setTodos(updatedTodos);
   };
-
   const handleDeleteTodo = (id: number) => {
     const filteredTodos = todos.filter((todo) => todo.id !== id);
     setTodos(filteredTodos);
   };
-
   return (
     <>
-      {/* <div x-data="{ isOpen: false }">
-        <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          x-on:click="isOpen = !isOpen"
-        >
-          Toggle
-        </button>
-        <div x-show="isOpen" className="p-4 bg-gray-200 mt-4">
-          This content will be shown or hidden.
-        </div>
-      </div> */}
-
       <div className="my-24 p-4 max-w-[479px] mx-auto border border-solid border-[#E2E8F0] rounded-[8px]">
         <h1 className="text-3xl font-bold">To-Do List</h1>
         <p className="text-[12px] text-[#64748B] font-medium text-start mt-7 mb-2">
