@@ -11,6 +11,7 @@ const TodoList: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [inputText, setInputText] = useState<string>("");
   const [editItemId, setEditItemId] = useState<number | null>(null);
+  const [editedText, setEditedText] = useState<string>("");
 
   const handleAddTodo = () => {
     if (inputText.trim() !== "") {
@@ -37,8 +38,35 @@ const TodoList: React.FC = () => {
     setTodos(filteredTodos);
   };
 
-  const handleEditTodo = (id: number) => {
+  // EDIT BUTTON
+  // const handleEditTodo = (id: number) => {
+  //   setEditItemId(id);
+  // };
+  // const saveTodo = (id: number) => {
+  //   setEditItemId(null);
+  // };
+  // const cancelTodo = () => {
+  //   setEditItemId(null);
+  //   setEditedText("");
+  // };
+
+  const handleEditTodo = (id: number, text: string) => {
     setEditItemId(id);
+    setEditedText(text);
+  };
+
+  const saveTodo = (id: number) => {
+    const updatedTodos = todos.map((todo) =>
+      todo.id === id ? { ...todo, text: editedText } : todo
+    );
+    setTodos(updatedTodos);
+    setEditItemId(null);
+    setEditedText("");
+  };
+
+  const cancelTodo = () => {
+    setEditItemId(null);
+    setEditedText("");
   };
 
   return (
@@ -75,24 +103,46 @@ const TodoList: React.FC = () => {
                   {todo.text}
                 </span>
               ) : (
-                <input
-                  type="text"
-                  value={todo.text}
-                  onChange={(e) => {
-                    const updatedTodos = todos.map((t) =>
-                      t.id === todo.id ? { ...t, text: e.target.value } : t
-                    );
-                    setTodos(updatedTodos);
-                  }}
-                  onBlur={() => setEditItemId(null)}
-                  className="border border-gray-300 rounded-md px-2 py-1 mr-2"
-                />
+                <>
+                  <div className="flex flex-col items-start justify-start">
+                    <input
+                      type="text"
+                      // value={todo.text}
+                      // onChange={(e) => {
+                      //   const updatedTodos = todos.map((t) =>
+                      //     t.id === todo.id ? { ...t, text: e.target.value } : t
+                      //   );
+                      //   setTodos(updatedTodos);
+                      // }}
+
+                      value={editedText}
+                      onChange={(e) => setEditedText(e.target.value)}
+                      className="border border-gray-300 rounded-md px-2 py-1 mr-2"
+                    />
+
+                    <div className="my-2">
+                      <button
+                        onClick={() => saveTodo(todo.id)}
+                        className="bg-[green] rounded-lg px-3 py-2 text-white text-xs mr-2"
+                      >
+                        Save
+                      </button>
+                      <button
+                        onClick={() => cancelTodo()}
+                        className="bg-[red] rounded-lg px-3 py-2 text-white text-xs mr-2"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
+                </>
               )}
 
               <div className="ml-auto flex items-center">
                 <button
-                  onClick={() => handleEditTodo(todo.id)}
-                  className={`bg-yellow-500 hover:bg-yellow-400 transition duration-200 ease-in-out text-white font-semibold p-3 rounded-[8px] focus:outline-none text-[14px] mr-2 ${
+                  // onClick={() => handleEditTodo(todo.id)}
+                  onClick={() => handleEditTodo(todo.id, todo.text)}
+                  className={`bg-yellow-500 hover:bg-yellow-400 transition duration-200 ease-in-out text-white font-semibold px-4 py-2 rounded-[8px] focus:outline-none text-[14px] mr-2 ${
                     todo.completed ? "opacity-[.5]" : ""
                   }`}
                   disabled={todo.completed}
