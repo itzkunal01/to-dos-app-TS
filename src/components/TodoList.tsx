@@ -39,22 +39,12 @@ const TodoList: React.FC = () => {
   };
 
   // EDIT BUTTON
-  // const handleEditTodo = (id: number) => {
-  //   setEditItemId(id);
-  // };
-  // const saveTodo = (id: number) => {
-  //   setEditItemId(null);
-  // };
-  // const cancelTodo = () => {
-  //   setEditItemId(null);
-  //   setEditedText("");
-  // };
-
   const handleEditTodo = (id: number, text: string) => {
     setEditItemId(id);
     setEditedText(text);
   };
 
+  // SAVE BUTTON
   const saveTodo = (id: number) => {
     const updatedTodos = todos.map((todo) =>
       todo.id === id ? { ...todo, text: editedText } : todo
@@ -64,6 +54,7 @@ const TodoList: React.FC = () => {
     setEditedText("");
   };
 
+  // CANCEL BUTTON
   const cancelTodo = () => {
     setEditItemId(null);
     setEditedText("");
