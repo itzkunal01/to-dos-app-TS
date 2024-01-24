@@ -1,5 +1,6 @@
 import React, { useState, ChangeEvent } from "react";
 import "tailwindcss/tailwind.css"; // Make sure you have the correct path to your Tailwind CSS file
+import trashImg from "../images/svg/heroicons_trash-solid.svg";
 
 interface Student {
   id: number;
@@ -202,10 +203,14 @@ const TodoTaskApp: React.FC = () => {
                   <td className="border px-4 py-2">{student.course}</td>
                   <td className="border px-4 py-2">
                     <button
-                      className="bg-red-500 text-white py-1 px-2 rounded"
+                      className="p-2"
                       onClick={() => handleDeleteStudent(student.id)}
                     >
-                      Delete
+                      <img
+                        className="cursor-pointer"
+                        src={trashImg}
+                        alt="trash-image"
+                      />
                     </button>
                   </td>
                 </tr>
