@@ -1,6 +1,7 @@
 import "./App.css";
 import MyButton from "./components/MyButton";
 import TodoList from "./components/TodoList";
+import TodoTaskApp from "./components/TodoTaskApp";
 
 function App() {
   return (
@@ -11,7 +12,8 @@ function App() {
       {/* MYButton can be number or boolean also. */}
       {/* <MyButton text={1} /> */}
       {/* <MyButton text={true} /> */}
-      <TodoList />
+      {/* <TodoList /> */}
+      <TodoTaskApp />
     </div>
   );
 }
