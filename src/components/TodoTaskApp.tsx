@@ -134,6 +134,13 @@ const TodoTaskApp: React.FC = () => {
     // Add more students and their courses as needed
   ]);
 
+  const [newStudent, setNewStudent] = useState<Student>({
+    id: students.length + 1,
+    name: "",
+    task: "",
+    course: "",
+  });
+
   const handleAddTask = (id: number, task: string): void => {
     setStudents((prevStudents) =>
       prevStudents.map((student) =>
@@ -142,9 +149,27 @@ const TodoTaskApp: React.FC = () => {
     );
   };
 
+  const handleAddNewStudent = (): void => {
+    if (newStudent.name && newStudent.task && newStudent.course) {
+      setStudents((prevStudents) => [...prevStudents, newStudent]);
+      setNewStudent({
+        id: newStudent.id + 1,
+        name: "",
+        task: "",
+        course: "",
+      });
+    }
+  };
+
+  const handleDeleteStudent = (id: number): void => {
+    setStudents((prevStudents) =>
+      prevStudents.filter((student) => student.id !== id)
+    );
+  };
+
   return (
     <>
-      <div className="container px-8 md:px-16 max-h-[600px] mt-20 mb-8 overflow-y-auto">
+      {/* <div className="container px-8 md:px-16 max-h-[600px] mt-20 mb-8 overflow-y-auto">
         <h2 className="text-2xl font-bold mb-4">Student To-Do List</h2>
         <table className="min-w-full table-auto">
           <thead>
@@ -173,6 +198,164 @@ const TodoTaskApp: React.FC = () => {
                 <td className="border px-4 py-2">{student.course}</td>
               </tr>
             ))}
+          </tbody>
+        </table>
+      </div> */}
+
+      {/* <div className="container px-8 md:px-16 max-h-[600px] mt-20 mb-8 overflow-y-auto">
+        <h2 className="text-2xl font-bold mb-4">Student To-Do List</h2>
+        <table className="min-w-full table-auto">
+          <thead>
+            <tr>
+              <th className="border px-4 py-2">ID</th>
+              <th className="border px-4 py-2">Name</th>
+              <th className="border px-4 py-2">Task</th>
+              <th className="border px-4 py-2">Course</th>
+            </tr>
+          </thead>
+          <tbody>
+            {students.map((student) => (
+              <tr key={student.id}>
+                <td className="border px-4 py-2">{student.id}</td>
+                <td className="border px-4 py-2">{student.name}</td>
+                <td className="border px-4 py-2">
+                  <input
+                    type="text"
+                    className="w-full p-2 border rounded"
+                    value={student.task}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                      handleAddTask(student.id, e.target.value)
+                    }
+                  />
+                </td>
+                <td className="border px-4 py-2">{student.course}</td>
+              </tr>
+            ))}
+            <tr>
+              <td className="border px-4 py-2">{newStudent.id}</td>
+              <td className="border px-4 py-2">
+                <input
+                  type="text"
+                  className="w-full p-2 border rounded"
+                  value={newStudent.name}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    setNewStudent({ ...newStudent, name: e.target.value })
+                  }
+                />
+              </td>
+              <td className="border px-4 py-2">
+                <input
+                  type="text"
+                  className="w-full p-2 border rounded"
+                  value={newStudent.task}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    setNewStudent({ ...newStudent, task: e.target.value })
+                  }
+                />
+              </td>
+              <td className="border px-4 py-2">
+                <input
+                  type="text"
+                  className="w-full p-2 border rounded"
+                  value={newStudent.course}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    setNewStudent({ ...newStudent, course: e.target.value })
+                  }
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <button
+          className="mt-4 bg-blue-500 text-white py-2 px-4 rounded"
+          onClick={handleAddNewStudent}
+        >
+          Add New Student
+        </button>
+      </div> */}
+
+      <div className="container px-8 md:px-16 max-h-[600px] mt-20 mb-8 overflow-y-auto">
+        <h2 className="text-2xl font-bold mb-4">Student To-Do List</h2>
+        <table className="min-w-full table-auto">
+          <thead>
+            <tr>
+              <th className="border px-4 py-2">Serial No.</th>
+              <th className="border px-4 py-2">ID</th>
+              <th className="border px-4 py-2">Name</th>
+              <th className="border px-4 py-2">Task</th>
+              <th className="border px-4 py-2">Course</th>
+              <th className="border px-4 py-2">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {students.map((student, index) => (
+              <tr key={student.id}>
+                <td className="border px-4 py-2">{index + 1}</td>
+                <td className="border px-4 py-2">{student.id}</td>
+                <td className="border px-4 py-2">{student.name}</td>
+                <td className="border px-4 py-2">
+                  <input
+                    type="text"
+                    className="w-full p-2 border rounded"
+                    value={student.task}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                      handleAddTask(student.id, e.target.value)
+                    }
+                  />
+                </td>
+                <td className="border px-4 py-2">{student.course}</td>
+                <td className="border px-4 py-2">
+                  <button
+                    className="bg-red-500 text-white py-1 px-2 rounded"
+                    onClick={() => handleDeleteStudent(student.id)}
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+            <tr>
+              <td className="border px-4 py-2">{students.length + 1}</td>
+              <td className="border px-4 py-2">{newStudent.id}</td>
+              <td className="border px-4 py-2">
+                <input
+                  type="text"
+                  className="w-full p-2 border rounded"
+                  value={newStudent.name}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    setNewStudent({ ...newStudent, name: e.target.value })
+                  }
+                />
+              </td>
+              <td className="border px-4 py-2">
+                <input
+                  type="text"
+                  className="w-full p-2 border rounded"
+                  value={newStudent.task}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    setNewStudent({ ...newStudent, task: e.target.value })
+                  }
+                />
+              </td>
+              <td className="border px-4 py-2">
+                <input
+                  type="text"
+                  className="w-full p-2 border rounded"
+                  value={newStudent.course}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    setNewStudent({ ...newStudent, course: e.target.value })
+                  }
+                />
+              </td>
+              <td className="border px-4 py-2">
+                <button
+                  className="bg-blue-500 text-white py-1 px-2 rounded"
+                  onClick={handleAddNewStudent}
+                >
+                  Add
+                </button>
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>
