@@ -1,6 +1,6 @@
 import "./App.css";
-import MyButton from "./components/MyButton";
-import TodoList from "./components/TodoList";
+// import MyButton from "./components/MyButton";
+// import TodoList from "./components/TodoList";
 import TodoTaskApp from "./components/TodoTaskApp";
 
 function App() {
